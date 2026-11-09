@@ -1,0 +1,23 @@
+{% extends 'todos/base.html' %}
+
+{% block content %}
+<div class="warning-box">
+    <div class="icon">⚠️</div>
+    <h2>Supprimer cette tâche ?</h2>
+    <p>
+        Vous êtes sur le point de supprimer définitivement
+        <strong>« {{ object.titre }} »</strong>.
+        Cette action est irréversible.
+    </p>
+
+    <form method="post" style="display: inline-block;">
+        {% csrf_token %}
+        <div class="form-actions" style="justify-content: center;">
+            <button type="submit" class="btn btn-danger">
+                🗑️ Oui, supprimer
+            </button>
+            <a href="{% url 'tache-list' %}" class="btn btn-secondary">Annuler</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

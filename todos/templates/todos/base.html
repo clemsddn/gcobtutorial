@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Ma Todo List{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'todos/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><a href="{% url 'tache-list' %}">📝 Ma Todo List</a></h1>
+            <p class="subtitle">Gérez vos tâches simplement</p>
+        </header>
+        {% if messages %}
+            <div style="margin-bottom: 1rem;">
+                {% for message in messages %}
+                    <div class="badge badge-success" style="display:block; padding: 0.75rem 1rem;">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <main class="card">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends 'todos/base.html' %}
+
+{% block content %}
+<div class="actions-bar">
+    <h2>Mes tâches</h2>
+    <a href="{% url 'tache-create' %}" class="btn btn-primary">➕ Nouvelle tâche</a>
+</div>
+
+{% if taches %}
+    <ul class="todo-list">
+        {% for tache in taches %}
+            <li class="todo-item {% if tache.terminee %}done{% endif %}">
+                <span class="todo-status">
+                    {% if tache.terminee %}✅{% else %}⏳{% endif %}
+                </span>
+
+                <div class="todo-content">
+                    <a href="{% url 'tache-detail' tache.pk %}" class="todo-title">
+                        {{ tache.titre }}
+                    </a>
+                    <div class="todo-meta">
+                        Créée le {{ tache.date_creation|date:"d/m/Y à H:i" }}
+                    </div>
+                </div>
+
+                <div class="todo-actions">
+                    <a href="{% url 'tache-update' tache.pk %}" class="btn btn-secondary btn-sm">✏️</a>
+                    <a href="{% url 'tache-delete' tache.pk %}" class="btn btn-danger btn-sm">🗑️</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <div class="empty-state">
+        <div class="icon">📭</div>
+        <p>Aucune tâche pour le moment.</p>
+        <p>Cliquez sur <strong>« Nouvelle tâche »</strong> pour commencer !</p>
+    </div>
+{% endif %}
+{% endblock %}

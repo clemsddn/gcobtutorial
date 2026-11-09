@@ -1,0 +1,34 @@
+{% extends 'todos/base.html' %}
+
+{% block content %}
+<h2 class="detail-title">
+    {% if tache.terminee %}✅{% else %}⏳{% endif %}
+    {{ tache.titre }}
+</h2>
+
+<div class="detail-meta">
+    <span>
+        Statut :
+        {% if tache.terminee %}
+            <span class="badge badge-success">Terminée</span>
+        {% else %}
+            <span class="badge badge-warning">En cours</span>
+        {% endif %}
+    </span>
+    <span>📅 {{ tache.date_creation|date:"d/m/Y à H:i" }}</span>
+</div>
+
+{% if tache.description %}
+    <div class="description">{{ tache.description|linebreaks }}</div>
+{% else %}
+    <p style="color: var(--text-muted); font-style: italic;">
+        Aucune description fournie.
+    </p>
+{% endif %}
+
+<div class="form-actions">
+    <a href="{% url 'tache-list' %}" class="btn btn-secondary">← Retour</a>
+    <a href="{% url 'tache-update' tache.pk %}" class="btn btn-primary">✏️ Modifier</a>
+    <a href="{% url 'tache-delete' tache.pk %}" class="btn btn-danger">🗑️ Supprimer</a>
+</div>
+{% endblock %}
