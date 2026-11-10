@@ -16,3 +16,4 @@ class Tache(models.Model):
 
     def get_absolute_url(self):
         return reverse('tache-detail', kwargs={'pk': self.pk})
+    

@@ -11,6 +11,11 @@ class TacheListView(ListView):
     model = Tache
     template_name = 'todos/tache_list.html'
     context_object_name = 'taches'
+    def get_context_data(self, **kwargs):
+        
+        return super().get_context_data(**kwargs)
+    def get_queryset(self):
+        return super().get_queryset().filter(terminee=True)
 
 
 class TacheDetailView(DetailView):
